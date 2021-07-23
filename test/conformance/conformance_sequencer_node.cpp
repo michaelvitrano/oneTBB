@@ -63,26 +63,17 @@ TEST_CASE("Deduction guides"){
 #endif
 }
 
-template<typename T>
-struct Sequencer{
-    using input_type = T;
-
-    std::size_t operator()(T v) {
-        return v;
-    }
-};
-
 //! Test sequencer_node single_push
 //! \brief \ref requirement
 TEST_CASE("sequencer_node single_push"){
-    Sequencer<int> sequencer;
+    conformance::Sequencer<int> sequencer;
     conformance::test_forwarding_single_push<oneapi::tbb::flow::sequencer_node<int>>(sequencer);
 }
 
 //! Test function_node buffering
 //! \brief \ref requirement
 TEST_CASE("sequencer_node buffering"){
-    Sequencer<int> sequencer;
+    conformance::Sequencer<int> sequencer;
     conformance::test_buffering<oneapi::tbb::flow::sequencer_node<int>, int>(sequencer);
 }
 
@@ -90,7 +81,7 @@ TEST_CASE("sequencer_node buffering"){
 //! Any intermediate state of src, including its links to predecessors and successors, is not copied.
 //! \brief \ref requirement
 TEST_CASE("sequencer_node copy constructor"){
-    Sequencer<int> sequencer;
+    conformance::Sequencer<int> sequencer;
     conformance::test_copy_ctor_for_buffering_nodes<oneapi::tbb::flow::sequencer_node<int>>(sequencer);
 }
 
@@ -105,7 +96,7 @@ TEST_CASE("sequencer_node superclasses"){
 //! \brief \ref interface
 TEST_CASE("sequencer_node rejects duplicate"){
     oneapi::tbb::flow::graph g;
-    Sequencer<int> sequencer;
+    conformance::Sequencer<int> sequencer;
 
     oneapi::tbb::flow::sequencer_node<int> node(g, sequencer);
 
@@ -119,7 +110,7 @@ TEST_CASE("sequencer_node rejects duplicate"){
 //! \brief \ref requirement
 TEST_CASE("queue_node methods"){
     oneapi::tbb::flow::graph g;
-    Sequencer<int> sequencer;
+    conformance::Sequencer<int> sequencer;
 
     oneapi::tbb::flow::sequencer_node<int> node(g, sequencer);
 
